@@ -376,39 +376,51 @@ prisonmap['yazoo'] = {
   center: new google.maps.LatLng(32.8890495,-90.4104538),
   population: 3575
 };
-
 var cityCircle;
-
+var map;
 function initialize() {
   // Create the map.
   var mapOptions = {
-    zoom: 5,
+    zoom: 4,
     center: new google.maps.LatLng(37.09024, -95.712891),
     mapTypeId: google.maps.MapTypeId.SATELLITE
   };
 
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
+  map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
-  // Construct the circle for each value in prisonmap.
+  // Construct the circle for each value in citymap.
   // Note: We scale the population by a factor of 20.
   for (var prison in prisonmap) {
     var populationOptions = {
       strokeColor: '#000000',
       strokeOpacity: 0.8,
       strokeWeight: 2,
-      fillColor: '#FBEFEF',
-      fillOpacity: 0.5,
+      fillColor: '#FFFFFF',
+      fillOpacity: 0.35,
       map: map,
+      // draggable: true,
       center: prisonmap[prison].center,
-      radius: prisonmap[prison].population * 20,
-      draggable: true,
-      geodesic: true
+      radius: prisonmap[prison].population * 30,
+      prisref: prisonmap[prison]
+      
     };
     // Add the circle for this city to the map.
     cityCircle = new google.maps.Circle(populationOptions);
+    google.maps.event.addListener(cityCircle, 'center_changed', displace());
   }
 }
+
+function displace(event) {
+  infoWindow = new google.maps.InfoWindow();
+  var oldCenter = cityCircle.prisref.center;
+  var newCenter = cityCircle.center
+  var contentString = '<b>This box stands for </b>' + cityCircle.prisref.population + '<b> human souls</b><br><br>' + '<b> What are we hiding?</b>';
+  infoWindow.setContent(contentString);
+  infoWindow.setPosition(cityCircle.center);
+  infoWindow.open(map);
+}
+
 
 google.maps.event.addDomListener(window, 'load', initialize);
     </script>

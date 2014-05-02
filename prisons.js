@@ -1,3 +1,17 @@
+/ google.maps.event.addListener(cityCircle, 'dragend', displace(prisonmap[prison]));
+
+  // Define an info window on the map.
+}
+// Show the new coordinates for the rectangle in an info window.
+// function displace(event, prison) {
+//   infoWindow = new google.maps.InfoWindow();
+//   var oldCenter = prison.center;
+//   var newCenter = cityCircle.center
+//   var contentString = '<b>You have moved </b>' + prison.population + '<b> human souls</b><br>' + '<b> away from their support and rehabilitation.</b>';
+//   infoWindow.setContent(contentString);
+//   infoWindow.setPosition(cityCircle.center);
+//   infoWindow.open(map);
+// }
 var prisonmap = {};
 prisonmap['alderson'] = {
   center: new google.maps.LatLng(37.726114, -80.667839),
@@ -363,38 +377,3 @@ prisonmap['yazoo'] = {
   center: new google.maps.LatLng(32.8890495,-90.4104538),
   population: 3575
 };
-
-var cityCircle;
-
-function initialize() {
-  // Create the map.
-  var mapOptions = {
-    zoom: 4,
-    center: new google.maps.LatLng(37.09024, -95.712891),
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-  };
-
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-
-  // Construct the circle for each value in prisonmap.
-  // Note: We scale the population by a factor of 20.
-  for (var prison in prisonmap) {
-    var populationOptions = {
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
-      map: map,
-      center: prisonmap[prison].center,
-      radius: prisonmap[prison].population / 20,
-      draggable: true,
-      geodesic: true
-    };
-    // Add the circle for this city to the map.
-    cityCircle = new google.maps.Circle(populationOptions);
-  }
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
