@@ -3,15 +3,15 @@
   // Define an info window on the map.
 }
 // Show the new coordinates for the rectangle in an info window.
-// function displace(event, prison) {
-//   infoWindow = new google.maps.InfoWindow();
-//   var oldCenter = prison.center;
-//   var newCenter = cityCircle.center
-//   var contentString = '<b>You have moved </b>' + prison.population + '<b> human souls</b><br>' + '<b> away from their support and rehabilitation.</b>';
-//   infoWindow.setContent(contentString);
-//   infoWindow.setPosition(cityCircle.center);
-//   infoWindow.open(map);
-// }
+function displace(event, prison) {
+  infoWindow = new google.maps.InfoWindow();
+  var oldCenter = prison.center;
+  var newCenter = cityCircle.center
+  var contentString = '<b>You have moved </b>' + prison.population + '<b> human souls</b><br>' + '<b> away from their support and rehabilitation.</b>';
+  infoWindow.setContent(contentString);
+  infoWindow.setPosition(cityCircle.center);
+  infoWindow.open(map);
+}
 var prisonmap = {};
 prisonmap['alderson'] = {
   center: new google.maps.LatLng(37.726114, -80.667839),
