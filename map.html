@@ -399,7 +399,7 @@ function initialize() {
       fillColor: '#FFFFFF',
       fillOpacity: 0.35,
       map: map,
-      // draggable: true,
+      draggable: true,
       center: prisonmap[prison].center,
       radius: prisonmap[prison].population * 30,
       prisref: prisonmap[prison]
@@ -407,7 +407,7 @@ function initialize() {
     };
     // Add the circle for this city to the map.
     cityCircle = new google.maps.Circle(populationOptions);
-    // google.maps.event.addListener(cityCircle, 'center_changed', displace());
+    google.maps.event.addListener(cityCircle, 'center_changed', displace());
   }
 }
 
